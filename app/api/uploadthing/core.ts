@@ -1,7 +1,6 @@
 import { db } from "@/db";
 import { images } from "@/db/schema";
 import { auth } from "@clerk/nextjs";
-import { revalidatePath } from "next/cache";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 
@@ -26,6 +25,7 @@ export const uploadRouter = {
       await db.insert(images).values({
         userId: metadata.userId,
         url: file.url,
+        key: file.key,
       });
 
       // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback

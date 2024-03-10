@@ -4,4 +4,5 @@ export const images = pgTable("images", {
   id: serial("id"),
   userId: text("user_id").notNull(),
   url: text("url").notNull(),
+  key: text("key").notNull(),
 });

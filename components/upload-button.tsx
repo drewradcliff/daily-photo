@@ -1,7 +1,7 @@
 "use client";
 
 import { UploadThingButton } from "@/lib/utils";
-import { revalidate } from "./actions";
+import { revalidate } from "../app/actions";
 
 export default function UploadButton() {
   return (
