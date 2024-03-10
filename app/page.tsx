@@ -1,34 +1,36 @@
-import { UserButton } from "@clerk/nextjs";
+import { UserButton, redirectToSignIn, auth } from "@clerk/nextjs";
 import UploadButton from "./upload-button";
-import { db } from "@/db";
-import { type Image, images } from "@/db/schema";
 import NextImage from "next/image";
+import { getImages } from "./utils";
 
 export default async function Home() {
-  const data: Image[] = await db.select().from(images);
+  const { userId } = auth();
+  if (!userId) {
+    redirectToSignIn();
+    return null;
+  }
+
+  const data = await getImages(userId);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="flex w-full max-w-5xl items-center justify-between">
+      <div className="flex w-full max-w-5xl items-center justify-between pb-8">
         <p>daily photo</p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <UserButton />
-        </div>
+        <UserButton />
       </div>
-      {data.length ? (
-        data.map(({ id, url }) => (
-          <NextImage
-            width={500}
-            height={500}
-            key={id}
-            src={url}
-            alt="Image"
-            className="rounded-md object-cover"
-          />
-        ))
-      ) : (
-        <UploadButton />
-      )}
+      <div className="grid grid-cols-1 gap-3 pb-8 md:grid-cols-2 lg:grid-cols-3">
+        {data?.map(({ id, url }) => (
+          <div key={id} className="relative h-64 w-72">
+            <NextImage
+              fill
+              src={url}
+              alt="Image"
+              className="rounded-md object-cover"
+            />
+          </div>
+        ))}
+      </div>
+      <UploadButton />
       <footer>
         <p>daily photo - Drew Radcliff © 2024</p>
       </footer>
