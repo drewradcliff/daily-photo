@@ -1,8 +1,9 @@
-import { pgTable, serial, text } from "drizzle-orm/pg-core";
+import { boolean, pgTable, serial, text } from "drizzle-orm/pg-core";
 
 export const images = pgTable("images", {
-  id: serial("id"),
+  id: serial("id").primaryKey(),
   userId: text("user_id").notNull(),
+  isActive: boolean("is_active").default(false),
   url: text("url").notNull(),
   key: text("key").notNull(),
 });
