@@ -29,7 +29,7 @@ export default async function Home() {
           ))}
         </div>
       ) : (
-        <p>No images yet</p>
+        <p className="italic">No images yet</p>
       )}
     </>
   );
