@@ -7,7 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { deleteImage } from "@/app/actions";
+import { deleteImage, setActive } from "@/app/actions";
 
 export default function DropdownButton({ imageKey }: { imageKey: string }) {
   return (
@@ -17,6 +17,9 @@ export default function DropdownButton({ imageKey }: { imageKey: string }) {
           <Ellipsis className="h-5 w-5 rounded-full bg-gray-200 text-gray-500" />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
+          <DropdownMenuItem onClick={() => setActive(imageKey)}>
+            Set Active
+          </DropdownMenuItem>
           <DropdownMenuItem onClick={() => deleteImage(imageKey)}>
             Delete
           </DropdownMenuItem>
