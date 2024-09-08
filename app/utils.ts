@@ -5,5 +5,9 @@ import { cache } from "react";
 
 export const getImages = cache(
   async (userId: string) =>
-    await db.select().from(images).where(eq(images.userId, userId)),
+    await db
+      .select()
+      .from(images)
+      .orderBy(images.id)
+      .where(eq(images.userId, userId)),
 );
