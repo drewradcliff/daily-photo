@@ -26,7 +26,7 @@ export default function RootLayout({
             fontSans.variable,
           )}
         >
-          <main className="flex min-h-screen flex-col items-center justify-between p-24">
+          <main className="flex min-h-screen flex-col items-center justify-between gap-6 p-10 sm:p-24">
             <Header />
             {children}
             <footer>
@@ -42,7 +42,7 @@ export default function RootLayout({
 function Header() {
   return (
     <header className="flex w-full max-w-5xl items-center justify-between">
-      <p>daily photo</p>
+      <p className="text-xl sm:text-base">daily photo</p>
       <div className="flex gap-6">
         <UploadButton />
         <UserButton />

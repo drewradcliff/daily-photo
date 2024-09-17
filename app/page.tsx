@@ -17,7 +17,7 @@ export default async function Home() {
   return (
     <>
       {data.length > 0 ? (
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid-cols grid gap-3 md:grid-cols-2 lg:grid-cols-3">
           {data.map(({ id, url, key, isActive }) => (
             <div key={id} className="relative h-64 w-72">
               <DropdownButton imageKey={key} />
