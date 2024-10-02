@@ -1,6 +1,5 @@
 import { UploadRouter } from "@/app/api/uploadthing/core";
 import {
-  generateReactHelpers,
   generateUploadButton,
   generateUploadDropzone,
 } from "@uploadthing/react";
