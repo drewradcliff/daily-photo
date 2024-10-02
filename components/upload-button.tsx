@@ -71,25 +71,24 @@ export default function UploadButton() {
       if (selectedImage) {
         const image = new Image();
         image.src = selectedImage;
-        image.onload = () => {
-          const canvas = document.createElement("canvas");
-          const ctx = canvas.getContext("2d");
-          if (!ctx) return;
-          canvas.width = croppedAreaPixels.width;
-          canvas.height = croppedAreaPixels.height;
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        if (ctx) {
+          canvas.width = image.width * (croppedAreaPixels.width / 100);
+          canvas.height = image.height * (croppedAreaPixels.height / 100);
           ctx.drawImage(
             image,
-            croppedAreaPixels.x,
-            croppedAreaPixels.y,
-            croppedAreaPixels.width,
-            croppedAreaPixels.height,
+            image.width * (croppedAreaPixels.x / 100),
+            image.height * (croppedAreaPixels.y / 100),
+            image.width * (croppedAreaPixels.width / 100),
+            image.height * (croppedAreaPixels.height / 100),
             0,
             0,
-            croppedAreaPixels.width,
-            croppedAreaPixels.height,
+            canvas.width,
+            canvas.height,
           );
-          setCroppedImage(canvas.toDataURL("image/jpeg"));
-        };
+          setCroppedImage(canvas.toDataURL("image/jpeg", 0.2));
+        }
       }
     },
     [selectedImage],
@@ -168,6 +167,7 @@ export default function UploadButton() {
                 onComplete={handleCropComplete}
                 aspect={3 / 4}
               >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={selectedImage}
                   alt="Selected Image"

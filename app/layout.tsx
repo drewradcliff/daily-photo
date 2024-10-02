@@ -26,7 +26,7 @@ export default function RootLayout({
             fontSans.variable,
           )}
         >
-          <main className="flex min-h-screen flex-col items-center justify-between gap-6 p-10 sm:p-24">
+          <main className="flex min-h-screen flex-col items-center justify-between gap-6 p-4 sm:p-24 lg:gap-24 lg:p-10">
             <Header />
             {children}
             <footer>

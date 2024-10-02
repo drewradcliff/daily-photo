@@ -4,6 +4,7 @@ import { getImages } from "./utils";
 import DropdownButton from "@/components/dropdown-button";
 import { Star } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 export default async function Home() {
   const { userId } = auth();
@@ -17,19 +18,21 @@ export default async function Home() {
   return (
     <>
       {data.length > 0 ? (
-        <div className="grid-cols grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid-cols grid gap-3 md:grid-cols-2 lg:grid-cols-4">
           {data.map(({ id, url, key, isActive }) => (
-            <div key={id} className="relative h-64 w-72">
+            <div key={id} className="relative w-72">
               <DropdownButton imageKey={key} />
-              <NextImage
-                src={url}
-                alt="Image"
-                className={cn([
-                  "rounded-md object-cover",
-                  isActive && "p-[1px] ring-4 ring-blue-500",
-                ])}
-                fill
-              />
+              <AspectRatio ratio={3 / 4}>
+                <NextImage
+                  src={url}
+                  alt="Image"
+                  className={cn([
+                    "rounded-md object-cover",
+                    isActive && "p-[1px] ring-4 ring-blue-500",
+                  ])}
+                  fill
+                />
+              </AspectRatio>
               {isActive && (
                 <div className="absolute left-1 top-1 rounded-full bg-blue-500 p-1 text-primary-foreground">
                   <Star className="h-4 w-4 fill-current" />
